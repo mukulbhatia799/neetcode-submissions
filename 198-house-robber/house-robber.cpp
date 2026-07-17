@@ -11,7 +11,7 @@ public:
         return dp[ind] = max(take, notTake);
     }
     int rob(vector<int>& nums) {
-        // memoization approach - O(n) t.c and O(n)+O(n) s.c for dp array and rec. stack space
+        // tabulation approach - O(n) t.c and O(n) s.c for dp array
         vector<int> dp(nums.size()+1, -1);
         return findAns(nums, dp, 0);
     }
