@@ -18,8 +18,31 @@ public:
         return dp[row][col] = count;
     }
     int uniquePaths(int m, int n) {
-        // using memoization
-        vector<vector<int>> dp(m, vector<int>(n, -1));
-        return findAns(dp, m, n, 0, 0);
+        // using tabulation
+        vector<vector<int>> dp(m, vector<int>(n, 0));
+        
+        // row1
+        for(int i = 0; i < n; i++) {
+            dp[0][i] = 1;
+        }
+
+        // row2 to m
+        for(int i = 1; i < m; i++) {
+            for(int j = 0; j < n; j++) {
+                int paths = 0;
+                if(j!=0) paths = dp[i][j-1];
+                if(i!=0) paths += dp[i-1][j];
+                dp[i][j] = paths;
+            }
+        }
+
+        // for(int i = 0; i < m; i++) {
+        //     for(int j = 0; j < n; j++) {
+        //         cout << dp[i][j] << " ";
+        //     }
+        //     cout << endl;
+        // }
+
+        return dp[m-1][n-1];
     }
 };
