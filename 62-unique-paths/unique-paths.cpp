@@ -18,21 +18,22 @@ public:
         return dp[row][col] = count;
     }
     int uniquePaths(int m, int n) {
-        // using tabulation
-        vector<vector<int>> dp(m, vector<int>(n, 0));
-        
+        // using space optimization
+        vector<int> dp_1D(n);
         // row1
         for(int i = 0; i < n; i++) {
-            dp[0][i] = 1;
+            dp_1D[i] = 1;
         }
 
         // row2 to m
         for(int i = 1; i < m; i++) {
+            int prev = 0;
             for(int j = 0; j < n; j++) {
                 int paths = 0;
-                if(j!=0) paths = dp[i][j-1];
-                if(i!=0) paths += dp[i-1][j];
-                dp[i][j] = paths;
+                if(j!=0) paths = prev;
+                if(i!=0) paths += dp_1D[j];
+                dp_1D[j] = paths;
+                prev = paths;
             }
         }
 
@@ -43,6 +44,6 @@ public:
         //     cout << endl;
         // }
 
-        return dp[m-1][n-1];
+        return dp_1D[n-1];
     }
 };
