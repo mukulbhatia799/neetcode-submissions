@@ -1,7 +1,7 @@
 class Solution {
 public:
     int minPathSum(vector<vector<int>>& grid) {
-        // using Tabulation
+        // using Space Optimization
         int n = grid.size();
         int m = grid[0].size();
         vector<int> dp(m, 0);
