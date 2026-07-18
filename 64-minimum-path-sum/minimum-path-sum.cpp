@@ -12,7 +12,7 @@ public:
     }
 
     int minPathSum(vector<vector<int>>& grid) {
-        // using Recursion
+        // using Memoization
         vector<vector<int>> dp(grid.size(), vector<int>(grid[0].size(), -1));
         return findAns(grid, dp, 0, 0);
     }
