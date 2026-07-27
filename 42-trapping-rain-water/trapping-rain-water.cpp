@@ -4,10 +4,9 @@ public:
         // t.c -> O(n) + O(n) + o(n) -> O(3n) ~ O(n)
         int n = height.size();
         vector<int> right(n, -1);
-        int maxx = height[0];
 
         // fill rightMax[] - right to left
-        maxx = height[n-1];
+        int maxx = height[n-1];
         for(int i = n-2; i >= 0; i--) {
             maxx = max(maxx, height[i]);
             right[i] = maxx;
