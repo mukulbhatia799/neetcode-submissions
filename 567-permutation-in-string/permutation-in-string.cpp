@@ -14,7 +14,7 @@ public:
             if(freq[s2[i]-'a'] > 0) {
                 // create a temp freq array so that we don't loose the original one.
                 vector<int> tempArr(26, 0);
-                for(int i = 0; i < 26; i++) tempArr[i] = freq[i];
+                for(int ptr = 0; ptr < 26; ptr++) tempArr[ptr] = freq[ptr];
                 // check valid permutation by traversal
                 int j = i;
                 while(j < size2 && tempArr[s2[j]-'a'] > 0) {
