@@ -1,17 +1,18 @@
 class Solution {
 public:
-    int findAns(int n, vector<int>& nums, vector<int> &dp, int ind) {
-        if(ind >= n) return 0;
-
-        if(dp[ind] != -1) return dp[ind];
-        int pick = nums[ind] + findAns(n, nums, dp, ind+2);
-        int notPick = findAns(n, nums, dp, ind+1);
-
-        return dp[ind] = max(pick, notPick);
-    }
     int rob(vector<int>& nums) {
-        // using memoization
-        vector<int> dp(nums.size(), -1);
-        return findAns(nums.size(), nums, dp, 0);
+        // using tabulation
+        int n = nums.size();
+        if(n == 1) return nums[0];
+        vector<int> dp(n);
+        dp[0] = nums[0];
+        dp[1] = max(nums[0], nums[1]);
+        for(int i = 2; i < n; i++) {
+            int pick = nums[i] + dp[i-2];
+            int notPick = dp[i-1];
+            dp[i] = max(pick, notPick);
+        }
+
+        return dp[n-1];
     }
 };
