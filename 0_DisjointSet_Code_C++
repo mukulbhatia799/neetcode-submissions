@@ -1,0 +1,62 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class DisjointSet {
+private:
+    vector<int> rank, parent;
+public:
+    DisjointSet(int size) {
+        rank.resize(size+1, 0);
+        parent.resize(size+1);
+        for(int i = 0; i < size+1; i++) {
+            parent[i] = i;
+        }
+    }
+    int findPar(int node) {
+        if(parent[node] == node) return node;
+        
+        return parent[node] = findPar(parent[node]);
+    }
+    void unionByRank(int u, int v) {
+        int u_par = findPar(u);
+        int v_par = findPar(v);
+        
+        if(u_par == v_par) return;
+        if(rank[u_par] < rank[v_par]) {
+            parent[u_par] = parent[v_par];
+        }
+        else if(rank[u_par] > rank[v_par]) {
+            parent[v_par] = parent[u_par];
+        }
+        else {
+            parent[v_par] = parent[u_par];
+            rank[u_par]++;
+        }
+    }
+};
+
+int main() {
+    DisjointSet ds(6);
+    ds.unionByRank(1, 2);
+    ds.unionByRank(2, 3);
+    ds.unionByRank(4, 5);
+    ds.unionByRank(6, 7);
+    
+    if(ds.findPar(5) != ds.findPar(6)) {
+        cout << "not same" << endl;
+    }
+    else cout << "same" << endl;
+    
+    ds.unionByRank(5, 6);
+    if(ds.findPar(5) != ds.findPar(6)) {
+        cout << "not same" << endl;
+    }
+    else cout << "same" << endl;
+
+    return 0;
+}
+
+
+
+
+
