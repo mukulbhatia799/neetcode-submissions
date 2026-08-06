@@ -1,16 +1,14 @@
 class Solution {
 public:
-    int findAns(int n, int ind, vector<int>& dp) {
-        if(ind == n) return 1;
-        if(ind > n) return 0;
-        if(dp[ind] != -1) return dp[ind];
-        int ans = findAns(n, ind+1, dp);
-        ans += findAns(n, ind+2, dp);
-        return dp[ind] = ans;
-    }
     int climbStairs(int n) {
-        // memoization
+        // tabulation
         vector<int> dp(n+1, -1);
-        return findAns(n, 0, dp);
+        dp[0] = 1;
+        dp[1] = 1;
+        for(int i = 2; i <= n; i++) {
+            dp[i] = dp[i-1] + dp[i-2];
+        }
+
+        return dp[n];
     }
 };
