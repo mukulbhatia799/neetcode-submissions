@@ -17,7 +17,7 @@ public:
         return dp[currRow][currCol] = ways;
     }
     int uniquePaths(int m, int n) {
-        // brute force approach - O(2^n)
+        // memoization approach - O(2^n)
         vector<vector<int>> dp(m, vector<int>(n, -1));
 
         return findAns(0, 0, m, n, dp);
